@@ -14,8 +14,10 @@
 
 (deftest test-simple-navigate
   (is (= (apply * (d2/navigate false (parse "test0-day2.txt")))
-         150)))
+         150)
+      "Part 1"))
 
 (deftest test-complex-navigate
   (is (= (apply * (d2/navigate 'with-aim (parse "test0-day2.txt")))
-         900)))
+         900)
+      "Part 2"))

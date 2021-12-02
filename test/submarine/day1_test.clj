@@ -9,8 +9,10 @@
 
 (deftest test-count-increases
   (is (= (d1/count-increases (parse "test0-day1.txt"))
-         7)))
+         7)
+      "Part 1"))
 
 (deftest test-count-sliding-window-increases
   (is (= (d1/count-sliding-window-increases (parse "test0-day1.txt"))
-         5)))
+         5)
+      "Part 2"))
