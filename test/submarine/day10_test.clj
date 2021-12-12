@@ -11,7 +11,6 @@
        slurp
        s/split-lines
        (map char-array)
-       (map (fn [l] (map #(vector (hash-map :char % :matched? false)) l)))
        (map #(into [] %))
        (map #(z/zipper vector? seq (fn [_ c] c) %))))
 

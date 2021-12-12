@@ -10,20 +10,11 @@
   ([st]
    (check-syntax (z/down st) '()))
   ([st stack]
-   (let [c (:char (first (first st)))]
+   (let [c (first st)]
      (cond
-       (some #(= c %) (vals close->open))
-       (check-syntax (z/right st) (cons c stack))
-       (= (first stack) (get close->open c))
-       (check-syntax (-> st
-                         z/left
-                         (z/edit #(hash-map :char (:char (first %)) :matched? true))
-                         z/right
-                         (z/edit #(hash-map :char (:char (first %)) :matched? true))
-                         z/right)
-                     (rest stack))
-       :else
-       (if (nil? c) stack c)))))
+       (some #(= c %) (vals close->open)) (check-syntax (z/right st) (cons c stack))
+       (= (first stack) (get close->open c)) (check-syntax (z/right st) (rest stack))
+       :else (if (nil? c) stack c)))))
 
 (defn syntax-error-score [lines]
   (apply + (map  #(get corrupt-scores %) (filter #(char? %) (map check-syntax lines)))))
